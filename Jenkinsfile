@@ -25,6 +25,13 @@ pipeline {
             }
         }
 
+        stage('Login to DockerHub') {
+            steps {
+                withCredentials([usernamePassword(credentialsId: 'dockerhub-creds', usernameVariable: 'USER', passwordVariable: 'PASS')]) {
+                    sh 'echo $PASS | docker login -u $USER --password-stdin'
+                }
+            }
+        }
         stage('Push Docker Image') {
             steps {
                 sh "docker push ashok918/node-docker-app:${BUILD_NUMBER}"
