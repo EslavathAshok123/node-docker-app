@@ -20,20 +20,20 @@ pipeline {
             steps {
                 sh """
                 docker build -t node-docker-app:${BUILD_NUMBER} .
-                docker tag node-docker-app:${BUILD_NUMBER} EslavathAshok123/node-docker-app:${BUILD_NUMBER}
+                docker tag node-docker-app:${BUILD_NUMBER} ashok918/node-docker-app:${BUILD_NUMBER}
                 """
             }
         }
 
         stage('Push Docker Image') {
             steps {
-                sh "docker push EslavathAshok123/node-docker-app:${BUILD_NUMBER}"
+                sh "docker push ashok918/node-docker-app:${BUILD_NUMBER}"
             }
         }
         
         stage('Create container') {
             steps {
-                sh "docker run -d -p 3000:8000 EslavathAshok123/node-docker-app:${BUILD_NUMBER}"
+                sh "docker run -d -p 3000:8000 ashok918/node-docker-app:${BUILD_NUMBER}"
             }
         }
 
